@@ -1,24 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>TODOLIST--VUE2</h1>
+    <TodoInput :onSubmit="onSubmit" />
+    <TodoList :list="list" :onDelete="onDelete" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TodoInput from "./components/TodoInput";
+import TodoList from "./components/TodoList";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    TodoInput,
+    TodoList,
+  },
+  data() {
+    return {
+      list: [],
+    };
+  },
+  methods: {
+    onSubmit(value) {
+      const nextList = [...this.list];
+      nextList.push(value);
+      this.list = nextList;
+    },
+    onDelete(index) {
+      const nextList = [...this.list];
+      nextList.splice(index, 1);
+      this.list = nextList;
+    },
+  },
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
